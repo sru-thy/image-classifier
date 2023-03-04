@@ -4,7 +4,7 @@ import sys
 # Flask
 from flask import Flask, redirect, url_for, request, render_template, Response, jsonify, redirect
 from werkzeug.utils import secure_filename
-# from gevent.pywsgi import WSGIServer
+from gevent.pywsgi import WSGIServer
 
 # TensorFlow and tf.keras
 import tensorflow as tf
@@ -89,9 +89,9 @@ def predict():
     return None
 
 
-# if __name__ == '__main__':
-#     # app.run(port=5002, threaded=False)
+if __name__ == '__main__':
+    # app.run(port=5002, threaded=False)
 
-#     # Serve the app with gevent
-#     http_server = WSGIServer(('0.0.0.0', 5000), app)
-#     http_server.serve_forever()
+    # Serve the app with gevent
+    http_server = WSGIServer(('0.0.0.0', 5000), app)
+    http_server.serve_forever()
