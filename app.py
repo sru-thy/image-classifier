@@ -18,10 +18,12 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 from util import base64_to_pil
 
+#open ai 
+import openai
 
 # Declare a flask app
 app = Flask(__name__)
-
+openai.api_key = "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"
 
 # You can use pretrained model from Keras
 # Check https://keras.io/applications/
@@ -83,8 +85,29 @@ def predict():
         result = str(pred_class[0][0][1])               # Convert to string
         result = result.replace('_', ' ').capitalize()
         
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt="""Q: Short Factual description of Shiba Inu 
+            A: Originally from japan, these small dogs were historically bred for hunting
+            Q: short Factual description of Seven Spot Lady bug
+            A: Truly a beetle, lady bugs feed on pest insects whilst also prey to others
+            Q: short Factual description of Balloon Cactus
+            A: Originating from South america, they are both food and water for desert dwellers
+            Q: short Factual description of Bearded dragon
+            A: spiky and chubby, and now living in homes and loves crickets for snacks
+            Q: short Factual description of Moss
+            A:Like a sponge moss soakes up moisture, and is a provider for new ecosystems to thrive
+            Q: short Factual description of {}
+            A: """.format(result),
+            temperature=0,
+            max_tokens=60,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
+        )
+        result_desc=response['choices'][0]['text']
         # Serialize the result, you can add additional fields
-        return jsonify(result=result, probability=pred_proba)
+        return jsonify(result=result,description=result_desc,probability=pred_proba)
 
     return None
 
