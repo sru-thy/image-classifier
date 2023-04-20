@@ -70,7 +70,7 @@ def index():
 def predict():
     if request.method == 'POST':
         # Get the image from post request
-        img = base64_to_pil(request.json)
+        img = base64_to_pil(request.data)
 
         # Save the image to ./uploads
         # img.save("./uploads/image.png")
@@ -91,10 +91,6 @@ def predict():
             A: Originally from japan, these small dogs were historically bred for hunting
             Q: short Factual description of Seven Spot Lady bug
             A: Truly a beetle, lady bugs feed on pest insects whilst also prey to others
-            Q: short Factual description of Balloon Cactus
-            A: Originating from South america, they are both food and water for desert dwellers
-            Q: short Factual description of Bearded dragon
-            A: spiky and chubby, and now living in homes and loves crickets for snacks
             Q: short Factual description of Moss
             A:Like a sponge moss soakes up moisture, and is a provider for new ecosystems to thrive
             Q: short Factual description of {}
