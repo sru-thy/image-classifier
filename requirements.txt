@@ -7,3 +7,4 @@ tensorflow-cpu==2.10.0
 Werkzeug==2.0.1
 Gunicorn
 openai
+python-dotenv
