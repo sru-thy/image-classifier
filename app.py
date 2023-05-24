@@ -1,5 +1,5 @@
 import os
-import sys
+from dotenv import load_dotenv
 
 # Flask
 from flask import Flask, redirect, url_for, request, render_template, Response, jsonify, redirect
@@ -10,9 +10,8 @@ from gevent.pywsgi import WSGIServer
 import tensorflow as tf
 from tensorflow import keras
 
-from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
+from keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from keras.utils import img_to_array
 
 # Some utilites
 import numpy as np
@@ -20,16 +19,18 @@ from util import base64_to_pil
 
 #open ai 
 import openai
+load_dotenv()
 
 # Declare a flask app
 app = Flask(__name__)
-openai.api_key = "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"
+
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 # You can use pretrained model from Keras
 # Check https://keras.io/applications/
 # or https://www.tensorflow.org/api_docs/python/tf/keras/applications
 
-from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2
+from keras.applications.mobilenet_v2 import MobileNetV2
 model = MobileNetV2(weights='imagenet')
 
 print('Model loaded. Check http://127.0.0.1:5000/')
