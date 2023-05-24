@@ -1,5 +1,4 @@
 import os
-import sys
 from dotenv import load_dotenv
 
 
@@ -13,7 +12,6 @@ import tensorflow as tf
 from tensorflow import keras
 
 from keras.applications.imagenet_utils import preprocess_input, decode_predictions
-from keras.models import load_model
 from keras.utils import img_to_array
 
 # Some utilites
@@ -22,7 +20,6 @@ from util import base64_to_pil
 
 #open ai 
 import openai
-
 load_dotenv()
 
 # Declare a flask app
