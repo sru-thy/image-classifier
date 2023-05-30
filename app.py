@@ -22,6 +22,10 @@ from util import base64_to_pil
 import openai
 load_dotenv()
 
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
+
 # Declare a flask app
 app = Flask(__name__)
 openai.api_key = os.environ.get("OPENAI_API_KEY")
